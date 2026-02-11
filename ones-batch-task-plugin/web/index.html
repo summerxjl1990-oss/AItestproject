@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ONES 批量创建任务</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <h1>ONES 批量创建任务</h1>
+        <p>按行录入任务，一次性创建到指定项目。</p>
+      </header>
+
+      <section class="card">
+        <h2>1. 连接配置</h2>
+        <div class="grid two">
+          <label>
+            ONES 域名
+            <input id="baseUrl" placeholder="https://your-team.ones.pro" />
+          </label>
+          <label>
+            OpenAPI Token
+            <input id="token" type="password" placeholder="pat_xxx" />
+          </label>
+          <label>
+            项目 UUID
+            <input id="projectUuid" placeholder="例如: 7MXt7L64" />
+          </label>
+          <label>
+            任务类型 UUID
+            <input id="issueTypeUuid" placeholder="例如: task_type_uuid" />
+          </label>
+        </div>
+
+        <details>
+          <summary>高级配置（可选）</summary>
+          <div class="grid two mt16">
+            <label>
+              默认负责人 UUID
+              <input id="defaultAssigneeUuid" placeholder="例如: RXbUNSu8" />
+            </label>
+            <label>
+              API 路径模板
+              <input id="apiPathTemplate" value="/project/v1/projects/{project_uuid}/issues" />
+            </label>
+          </div>
+          <p class="hint">当你的 ONES 环境接口路径不同，请修改 API 路径模板。</p>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>2. 批量任务输入</h2>
+        <p class="hint">每行一个任务，格式：<code>标题 | 描述 | 负责人UUID(可空) | 截止日期YYYY-MM-DD(可空)</code></p>
+        <textarea id="bulkInput" rows="11" placeholder="登录页重构 | 统一登录页视觉和交互 | RXbUNSu8 | 2026-02-20\n新增埋点 | 首页关键按钮埋点 |  | 2026-02-18"></textarea>
+
+        <div class="actions">
+          <button id="previewBtn" class="secondary">预览解析</button>
+          <button id="createBtn" class="primary">开始创建</button>
+        </div>
+
+        <div id="status" class="status">等待输入</div>
+      </section>
+
+      <section class="card">
+        <h2>3. 预览 / 结果</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>标题</th>
+              <th>负责人</th>
+              <th>截止日期</th>
+              <th>状态</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

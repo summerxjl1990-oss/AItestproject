@@ -1,0 +1,31 @@
+name: ones-batch-create-issues
+version: 0.1.0
+displayName:
+  zh-CN: 批量创建任务
+  en-US: Batch Create Issues
+description:
+  zh-CN: 在 ONES 中按行批量创建任务
+  en-US: Create issues in batch in ONES
+
+# 注意：开放平台控制台可按需追加更细粒度权限
+permissions:
+  - openapi:project.write
+  - openapi:project.read
+
+modules:
+  - moduleType: ones.page.route
+    # 生产环境请替换为你实际部署地址
+    url: https://your-plugin-domain.example.com/index.html
+    params:
+      path: /batch-create-issues
+      name:
+        zh-CN: 批量创建任务
+        en-US: Batch Create Issues
+
+  - moduleType: ones.workspace.navigation
+    # 生产环境请替换为你实际部署地址
+    url: https://your-plugin-domain.example.com/index.html
+    params:
+      title:
+        zh-CN: 批量建任务
+        en-US: Batch Issues
